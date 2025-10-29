@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài kiểm tra kiến thức</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Nhập thông tin -->
+  <div class="container" id="info-section">
+    <h2>Thông tin thí sinh</h2>
+    <label>Họ và tên:</label>
+    <input type="text" id="name" placeholder="Nhập họ và tên">
+    <label>Tiểu đội:</label>
+    <input type="text" id="team" placeholder="Nhập tiểu đội">
+    <label>Số thứ tự trong tiểu đội:</label>
+    <input type="number" id="number" placeholder="Nhập số thứ tự">
+    <button id="startBtn">Bắt đầu làm bài</button>
+  </div>
+
+  <!-- Bài kiểm tra -->
+  <div class="container hidden" id="quiz-section">
+    <h2>Bài kiểm tra kiến thức</h2>
+    <form id="quizForm">
+      <div class="question">
+        <p>1. Ai là người viết bản Tuyên ngôn độc lập của Việt Nam?</p>
+        <label><input type="radio" name="q1" value="a"> Trường Chinh</label>
+        <label><input type="radio" name="q1" value="b"> Võ Nguyên Giáp</label>
+        <label><input type="radio" name="q1" value="c"> Hồ Chí Minh</label>
+        <label><input type="radio" name="q1" value="d"> Phạm Văn Đồng</label>
+      </div>
+
+      <div class="question">
+        <p>2. Điền từ khóa còn thiếu: “Dân tộc Việt Nam quyết tâm đánh thắng mọi ___ xâm lược.”</p>
+        <input type="text" name="q2" placeholder="Nhập từ khóa...">
+      </div>
+
+      <div class="question">
+        <p>3. Tổ chức nào lãnh đạo trực tiếp, tuyệt đối quân đội nhân dân Việt Nam?</p>
+        <label><input type="radio" name="q3" value="a"> Quốc hội</label>
+        <label><input type="radio" name="q3" value="b"> Chính phủ</label>
+        <label><input type="radio" name="q3" value="c"> Đảng Cộng sản Việt Nam</label>
+        <label><input type="radio" name="q3" value="d"> Bộ Quốc phòng</label>
+      </div>
+
+      <div class="question">
+        <p>4. Điền từ khóa còn thiếu: “Quân đội nhân dân Việt Nam mang bản chất ___ của giai cấp công nhân.”</p>
+        <input type="text" name="q4" placeholder="Nhập từ khóa...">
+      </div>
+
+      <button type="submit">Nộp bài</button>
+    </form>
+  </div>
+
+  <!-- Kết quả -->
+  <div class="container hidden" id="result-section">
+    <h2>Kết quả bài làm</h2>
+    <p id="studentInfo"></p>
+    <p id="score"></p>
+    <div id="feedback"></div>
+
+    <h3>Bảng xếp hạng</h3>
+    <table id="leaderboard">
+      <thead>
+        <tr>
+          <th>Họ tên</th>
+          <th>Tiểu đội</th>
+          <th>Số TT</th>
+          <th>Điểm</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="buttons">
+      <button id="clearLeaderboard">🧹 Xóa bảng xếp hạng</button>
+      <button id="exportCSV">⬇️ Xuất file CSV</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
