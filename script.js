@@ -1,5 +1,5 @@
 // === CONFIG ===
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyl7KdtiqhdvSbCpnAJLyaGQ3y4OCI8yejw47SBggn-NRtSB2d0GDnHKtYYTQQWS-RB/exec"; // Dán URL Apps Script Web App vào đây
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl6GrXRu04i7FX3l-Cbe8VIqVIGb4_kekbjomkD2I6n5Ee1iEFXyEc3rI-sqcVM7qO/exec"; // Dán URL Apps Script Web App vào đây
 
 // === ELEMENTS ===
 const startBtn = document.getElementById("startBtn");
@@ -66,3 +66,4 @@ quizForm.addEventListener("submit", async (e) => {
     alert("❌ Lỗi khi gửi dữ liệu lên bảng xếp hạng. Kiểm tra lại URL Apps Script.");
   }
 });
+
