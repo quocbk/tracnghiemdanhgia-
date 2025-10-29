@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="container">
-    <h2>🏆 Bảng xếp hạng kết quả làm bài</h2>
+    <h2>🏆 Bảng xếp hạng toàn hệ thống</h2>
     <table id="leaderboard">
       <thead>
         <tr>
@@ -17,12 +17,14 @@
           <th>Tiểu đội</th>
           <th>Số TT</th>
           <th>Điểm</th>
+          <th>Thời gian nộp</th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
 
     <div class="buttons">
+      <button id="refresh">🔄 Làm mới</button>
       <button id="sortDesc">⬇️ Điểm cao → thấp</button>
       <button id="sortAsc">⬆️ Điểm thấp → cao</button>
       <a href="index.html" class="view-link">⬅️ Quay lại làm bài</a>
@@ -30,65 +32,41 @@
   </div>
 
   <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyPErwv2wloLciUZZauYv968voBBjzznpWY4escXf0kErl3Hr-4RT-eS1nRy9y4rlOw/exec"; // Dán cùng URL Apps Script ở đây
     const tableBody = document.querySelector("#leaderboard tbody");
-    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+    let leaderboard = [];
+
+    async function fetchData() {
+      tableBody.innerHTML = "<tr><td colspan='6'>Đang tải dữ liệu...</td></tr>";
+      try {
+        const res = await fetch(SCRIPT_URL);
+        leaderboard = await res.json();
+        renderTable(leaderboard.sort((a,b) => b.score - a.score));
+      } catch (err) {
+        tableBody.innerHTML = "<tr><td colspan='6'>❌ Lỗi tải dữ liệu</td></tr>";
+      }
+    }
 
     function renderTable(data) {
       tableBody.innerHTML = "";
-      if (data.length === 0) {
-        tableBody.innerHTML = "<tr><td colspan='5'>Chưa có dữ liệu</td></tr>";
-        return;
-      }
-      data.forEach((item, index) => {
-        const row = `<tr>
-          <td>${index + 1}</td>
-          <td>${item.name}</td>
-          <td>${item.team}</td>
-          <td>${item.number}</td>
-          <td>${item.score}</td>
-        </tr>`;
-        tableBody.innerHTML += row;
+      data.forEach((item, i) => {
+        tableBody.innerHTML += `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${item.name}</td>
+            <td>${item.team}</td>
+            <td>${item.number}</td>
+            <td>${item.score}</td>
+            <td>${new Date(item.timestamp).toLocaleString("vi-VN")}</td>
+          </tr>`;
       });
     }
 
-    renderTable(leaderboard.sort((a, b) => b.score - a.score));
+    document.getElementById("refresh").addEventListener("click", fetchData);
+    document.getElementById("sortDesc").addEventListener("click", () => renderTable([...leaderboard].sort((a,b)=>b.score-a.score)));
+    document.getElementById("sortAsc").addEventListener("click", () => renderTable([...leaderboard].sort((a,b)=>a.score-b.score)));
 
-    document.getElementById("sortDesc").addEventListener("click", () => {
-      leaderboard.sort((a, b) => b.score - a.score);
-      renderTable(leaderboard);
-    });
-
-    document.getElementById("sortAsc").addEventListener("click", () => {
-      leaderboard.sort((a, b) => a.score - b.score);
-      renderTable(leaderboard);
-    });
-
-    document.getElementById("clearLeaderboard").addEventListener("click", () => {
-      if (confirm("Bạn có chắc muốn xóa toàn bộ bảng xếp hạng không?")) {
-        localStorage.removeItem("leaderboard");
-        leaderboard = [];
-        renderTable(leaderboard);
-      }
-    });
-
-    document.getElementById("exportCSV").addEventListener("click", () => {
-      if (leaderboard.length === 0) {
-        alert("Chưa có dữ liệu để xuất!");
-        return;
-      }
-      let csv = "STT,Họ tên,Tiểu đội,Số thứ tự,Điểm\n";
-      leaderboard.forEach((item, index) => {
-        csv += `${index + 1},${item.name},${item.team},${item.number},${item.score}\n`;
-      });
-
-      const blob = new Blob([csv], { type: "text/csv" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "leaderboard.csv";
-      a.click();
-      URL.revokeObjectURL(url);
-    });
+    fetchData();
   </script>
 </body>
 </html>

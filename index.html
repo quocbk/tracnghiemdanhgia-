@@ -25,9 +25,9 @@
     <form id="quizForm">
       <div class="question">
         <p>1. Ai là người viết bản Tuyên ngôn độc lập của Việt Nam?</p>
+        <label><input type="radio" name="q1" value="c"> Hồ Chí Minh</label>
         <label><input type="radio" name="q1" value="a"> Trường Chinh</label>
         <label><input type="radio" name="q1" value="b"> Võ Nguyên Giáp</label>
-        <label><input type="radio" name="q1" value="c"> Hồ Chí Minh</label>
         <label><input type="radio" name="q1" value="d"> Phạm Văn Đồng</label>
       </div>
 
@@ -38,9 +38,9 @@
 
       <div class="question">
         <p>3. Tổ chức nào lãnh đạo trực tiếp, tuyệt đối quân đội nhân dân Việt Nam?</p>
+        <label><input type="radio" name="q3" value="c"> Đảng Cộng sản Việt Nam</label>
         <label><input type="radio" name="q3" value="a"> Quốc hội</label>
         <label><input type="radio" name="q3" value="b"> Chính phủ</label>
-        <label><input type="radio" name="q3" value="c"> Đảng Cộng sản Việt Nam</label>
         <label><input type="radio" name="q3" value="d"> Bộ Quốc phòng</label>
       </div>
 
@@ -59,23 +59,7 @@
     <p id="studentInfo"></p>
     <p id="score"></p>
     <div id="feedback"></div>
-
-    <h3>Bảng xếp hạng</h3>
-    <table id="leaderboard">
-      <thead>
-        <tr>
-          <th>Họ tên</th>
-          <th>Tiểu đội</th>
-          <th>Số TT</th>
-          <th>Điểm</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-
-    <div class="buttons">
-      <a href="leaderboard.html" class="view-link">📊 Xem bảng xếp hạng riêng</a>
-    </div>
+    <a href="leaderboard.html" class="view-link">📊 Xem bảng xếp hạng</a>
   </div>
 
   <script src="script.js"></script>
