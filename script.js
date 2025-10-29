@@ -1,5 +1,5 @@
 // === CONFIG ===
-const SCRIPT_URL = "hhttps://script.google.com/macros/s/AKfycbyPErwv2wloLciUZZauYv968voBBjzznpWY4escXf0kErl3Hr-4RT-eS1nRy9y4rlOw/exec"; // Dán URL Apps Script Web App vào đây
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyl7KdtiqhdvSbCpnAJLyaGQ3y4OCI8yejw47SBggn-NRtSB2d0GDnHKtYYTQQWS-RB/exec"; // Dán URL Apps Script Web App vào đây
 
 // === ELEMENTS ===
 const startBtn = document.getElementById("startBtn");
