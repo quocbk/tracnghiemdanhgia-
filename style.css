@@ -86,3 +86,15 @@ button:hover {
   justify-content: space-around;
   margin-top: 15px;
 }
+
+.view-link {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.view-link:hover {
+  text-decoration: underline;
+}

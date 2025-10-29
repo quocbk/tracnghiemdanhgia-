@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảng xếp hạng</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>🏆 Bảng xếp hạng kết quả làm bài</h2>
+    <table id="leaderboard">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Họ tên</th>
+          <th>Tiểu đội</th>
+          <th>Số TT</th>
+          <th>Điểm</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="buttons">
+      <button id="sortDesc">⬇️ Điểm cao → thấp</button>
+      <button id="sortAsc">⬆️ Điểm thấp → cao</button>
+      <a href="index.html" class="view-link">⬅️ Quay lại làm bài</a>
+    </div>
+  </div>
+
+  <script>
+    const tableBody = document.querySelector("#leaderboard tbody");
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+    function renderTable(data) {
+      tableBody.innerHTML = "";
+      if (data.length === 0) {
+        tableBody.innerHTML = "<tr><td colspan='5'>Chưa có dữ liệu</td></tr>";
+        return;
+      }
+      data.forEach((item, index) => {
+        const row = `<tr>
+          <td>${index + 1}</td>
+          <td>${item.name}</td>
+          <td>${item.team}</td>
+          <td>${item.number}</td>
+          <td>${item.score}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+      });
+    }
+
+    renderTable(leaderboard.sort((a, b) => b.score - a.score));
+
+    document.getElementById("sortDesc").addEventListener("click", () => {
+      leaderboard.sort((a, b) => b.score - a.score);
+      renderTable(leaderboard);
+    });
+
+    document.getElementById("sortAsc").addEventListener("click", () => {
+      leaderboard.sort((a, b) => a.score - b.score);
+      renderTable(leaderboard);
+    });
+
+    document.getElementById("clearLeaderboard").addEventListener("click", () => {
+      if (confirm("Bạn có chắc muốn xóa toàn bộ bảng xếp hạng không?")) {
+        localStorage.removeItem("leaderboard");
+        leaderboard = [];
+        renderTable(leaderboard);
+      }
+    });
+
+    document.getElementById("exportCSV").addEventListener("click", () => {
+      if (leaderboard.length === 0) {
+        alert("Chưa có dữ liệu để xuất!");
+        return;
+      }
+      let csv = "STT,Họ tên,Tiểu đội,Số thứ tự,Điểm\n";
+      leaderboard.forEach((item, index) => {
+        csv += `${index + 1},${item.name},${item.team},${item.number},${item.score}\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "leaderboard.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
