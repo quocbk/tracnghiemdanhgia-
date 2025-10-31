@@ -32,7 +32,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl6GrXRu04i7FX3l-Cbe8VIqVIGb4_kekbjomkD2I6n5Ee1iEFXyEc3rI-sqcVM7qO/exec"; // Dán cùng URL Apps Script ở đây
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwY-4B5EmPF6pscWXzWFoNfcWUDCN7JuZeardWJZHbkSRbiZ9StSU-65OnqVNj6TUHI/exec"; // Dán cùng URL Apps Script ở đây
     const tableBody = document.querySelector("#leaderboard tbody");
     let leaderboard = [];
 
@@ -48,19 +48,32 @@
     }
 
     function renderTable(data) {
-      tableBody.innerHTML = "";
-      data.forEach((item, i) => {
-        tableBody.innerHTML += `
-          <tr>
-            <td>${i + 1}</td>
-            <td>${item.name}</td>
-            <td>${item.team}</td>
-            <td>${item.number}</td>
-            <td>${item.score}</td>
-            <td>${new Date(item.timestamp).toLocaleString("vi-VN")}</td>
-          </tr>`;
-      });
-    }
+  tableBody.innerHTML = "";
+
+  if (data.length === 0) {
+    tableBody.innerHTML = "<tr><td colspan='6'>Chưa có dữ liệu</td></tr>";
+    return;
+  }
+
+  // Sắp xếp điểm giảm dần
+  data.sort((a, b) => b.score - a.score);
+
+  // Hiển thị thứ hạng
+  data.forEach((item, index) => {
+    const row = `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${item.name}</td>
+        <td>${item.team}</td>
+        <td>${item.number}</td>
+        <td>${item.score}</td>
+        <td>${new Date(item.timestamp).toLocaleString("vi-VN")}</td>
+      </tr>
+    `;
+    tableBody.innerHTML += row;
+  });
+}
+
 
     document.getElementById("refresh").addEventListener("click", fetchData);
     document.getElementById("sortDesc").addEventListener("click", () => renderTable([...leaderboard].sort((a,b)=>b.score-a.score)));
@@ -70,4 +83,3 @@
   </script>
 </body>
 </html>
-

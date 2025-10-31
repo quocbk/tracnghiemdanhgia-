@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Kiểm tra kết nối Google Apps Script</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .result {
+      padding: 10px 16px;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h2>🔍 Kiểm tra kết nối Google Apps Script</h2>
+  <button id="testButton">Gửi yêu cầu thử</button>
+  <div class="result" id="result">Chưa kiểm tra...</div>
+
+  <script>
+    const TEST_URL = "https://script.google.com/macros/s/AKfycbwY-4B5EmPF6pscWXzWFoNfcWUDCN7JuZeardWJZHbkSRbiZ9StSU-65OnqVNj6TUHI/exec";
+    document.getElementById("testButton").addEventListener("click", async () => {
+      document.getElementById("result").innerText = "⏳ Đang gửi yêu cầu...";
+      try {
+        const res = await fetch(TEST_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify({
+            name: "Test",
+            team: "DEV",
+            number: 1,
+            score: 10,
+            timestamp: new Date().toISOString()
+          }),
+          headers: { "Content-Type": "application/json" }
+        });
+        document.getElementById("result").innerText = "✅ Gửi yêu cầu thành công (không lỗi CORS)";
+      } catch (err) {
+        document.getElementById("result").innerText = "❌ Lỗi kết nối: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
