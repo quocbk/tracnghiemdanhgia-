@@ -6,7 +6,7 @@ const resultSection = document.getElementById("result-section");
 const quizForm = document.getElementById("quizForm");
 
 let timerInterval;
-let timeLeft = 5 * 60; // 5 phút
+let timeLeft = 30 * 60; // 30 phút
 let isAdmin = false; // ✅ Khai báo toàn cục
 
 // === CHỈ ĐƯỢC LÀM 1 LẦN ===
@@ -176,3 +176,4 @@ quizForm.addEventListener("submit", (e) => {
     score >= 10 ? "👍 Làm khá tốt!" :
     "💪 Cần cố gắng thêm!";
 });
+
