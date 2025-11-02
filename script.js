@@ -111,10 +111,10 @@ quizForm.addEventListener("submit", (e) => {
     q14: "c",
     q15: "b",
     q16: "c",
-    q17: ["nhà nước", "Nhà nước"],
-    q18: ["thu lợi bất chính", "Thu lợi bất chính"],
-    q19: ["tuyên truyền, giáo dục", "Tuyên truyền, giáo dục"],
-    q20: ["câu lạc bộ", "Câu lạc bộ"],
+    q17: "nhà nước",
+    q18: "thu lợi bất chính",
+    q19: "tuyên truyền, giáo dục",
+    q20: "câu lạc bộ",
   };
 
   let score = 0;
