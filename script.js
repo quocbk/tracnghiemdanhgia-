@@ -176,4 +176,3 @@ quizForm.addEventListener("submit", (e) => {
     score >= 10 ? "👍 Làm khá tốt!" :
     "💪 Cần cố gắng thêm!";
 });
-
