@@ -95,22 +95,70 @@ quizForm.addEventListener("submit", (e) => {
   if (!isAdmin) localStorage.setItem("hasDoneQuiz", "true"); // ✅ Bây giờ isAdmin có giá trị đúng
 
   const answers = {
-    q1: "c",
-    q2: "kẻ thù",
-    q3: "c",
-    q4: "cách mạng",
+    q1:  "d",
+    q2:  "a",
+    q3:  "c",
+    q4:  "a",
+    q5:  "c",
+    q6:  "a",
+    q7:  "c",
+    q8:  "b",
+    q9:  "c",
+    q10: "b",
+    q11: "d",
+    q12: "c",
+    q13: "c",
+    q14: "c",
+    q15: "b",
+    q16: "c",
+    q17: ["nhà nước", "Nhà nước"],
+    q18: ["thu lợi bất chính", "Thu lợi bất chính"],
+    q19: ["tuyên truyền, giáo dục", "Tuyên truyền, giáo dục"],
+    q20: ["câu lạc bộ", "Câu lạc bộ"],
   };
 
   let score = 0;
-  const q1 = quizForm.q1.value;
-  const q2 = quizForm.q2.value.trim().toLowerCase();
-  const q3 = quizForm.q3.value;
-  const q4 = quizForm.q4.value.trim().toLowerCase();
+  const q1  = quizForm.q1.value;
+  const q2  = quizForm.q2.value;
+  const q3  = quizForm.q3.value;
+  const q4  = quizForm.q4.value;
+  const q5  = quizForm.q5.value;
+  const q6  = quizForm.q6.value;
+  const q7  = quizForm.q7.value;
+  const q8  = quizForm.q8.value;
+  const q9  = quizForm.q9.value;
+  const q10 = quizForm.q10.value;
+  const q11 = quizForm.q11.value;
+  const q12 = quizForm.q12.value;
+  const q13 = quizForm.q13.value;
+  const q14 = quizForm.q14.value;
+  const q15 = quizForm.q15.value;
+  const q16 = quizForm.q16.value;
+  const q17 = quizForm.q17.value.trim().toLowerCase();
+  const q18 = quizForm.q18.value.trim().toLowerCase();
+  const q19 = quizForm.q19.value.trim().toLowerCase();
+  const q20 = quizForm.q20.value.trim().toLowerCase();
 
-  if (q1 === answers.q1) score++;
-  if (q2.includes(answers.q2)) score++;
-  if (q3 === answers.q3) score++;
-  if (q4.includes(answers.q4)) score++;
+  if (q1  === answers.q1)  score++;
+  if (q2  === answers.q2)  score++;
+  if (q3  === answers.q3)  score++;
+  if (q4  === answers.q4)  score++;
+  if (q5  === answers.q5)  score++;
+  if (q6  === answers.q6)  score++;
+  if (q7  === answers.q7)  score++;
+  if (q8  === answers.q8)  score++;
+  if (q9  === answers.q9)  score++;
+  if (q10 === answers.q10) score++;
+  if (q11 === answers.q11) score++;
+  if (q12 === answers.q12) score++;
+  if (q13 === answers.q13) score++;
+  if (q14 === answers.q14) score++;
+  if (q15 === answers.q15) score++;
+  if (q16 === answers.q16) score++;
+  if (q17.includes(answers.q17)) score++;
+  if (q18.includes(answers.q18)) score++;
+  if (q19.includes(answers.q19)) score++;
+  if (q20.includes(answers.q20)) score++;
 
   const name = document.getElementById("name").value.trim();
   const team = document.getElementById("team").value.trim();
@@ -121,10 +169,10 @@ quizForm.addEventListener("submit", (e) => {
 
   document.getElementById("studentInfo").innerText = 
     `Họ tên: ${name} | Tiểu đội: ${team} | Số thứ tự: ${number}`;
-  document.getElementById("score").innerText = `Điểm của bạn: ${score}/4`;
+  document.getElementById("score").innerText = `Điểm của bạn: ${score}/20`;
 
   document.getElementById("feedback").innerHTML =
-    score === 4 ? "🌟 Xuất sắc!" :
-    score >= 2 ? "👍 Làm khá tốt!" :
+    score === 20 ? "🌟 Xuất sắc!" :
+    score >= 10 ? "👍 Làm khá tốt!" :
     "💪 Cần cố gắng thêm!";
 });
